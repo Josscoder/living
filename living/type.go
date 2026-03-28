@@ -31,5 +31,11 @@ func (NopLivingType) DecodeNBT(m map[string]any, data *world.EntityData) {
 }
 
 func (NopLivingType) EncodeNBT(data *world.EntityData) map[string]any {
-	return map[string]any{"data": data}
+	return map[string]any{
+		"Pos":     []float32{float32(data.Pos[0]), float32(data.Pos[1]), float32(data.Pos[2])},
+		"Motion":  []float32{float32(data.Vel[0]), float32(data.Vel[1]), float32(data.Vel[2])},
+		"Yaw":     float32(data.Rot[0]),
+		"Pitch":   float32(data.Rot[1]),
+		"NameTag": data.Name,
+	}
 }
