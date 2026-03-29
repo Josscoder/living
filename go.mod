@@ -10,6 +10,7 @@ require (
 )
 
 require (
+	github.com/bedrock-gophers/nbtconv v0.0.0-20240215023331-5bc285763fcc // indirect
 	github.com/brentp/intintmap v0.0.0-20190211203843-30dc0ade9af9 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/coreos/go-oidc/v3 v3.17.0 // indirect
