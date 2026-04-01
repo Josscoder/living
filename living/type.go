@@ -1,6 +1,9 @@
 package living
 
 import (
+	"time"
+
+	"github.com/bedrock-gophers/nbtconv"
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/world"
 )
@@ -31,5 +34,24 @@ func (NopLivingType) DecodeNBT(m map[string]any, data *world.EntityData) {
 }
 
 func (NopLivingType) EncodeNBT(data *world.EntityData) map[string]any {
-	return map[string]any{"data": data}
+	nbt := make(map[string]any)
+
+	nbt["Pos"] = nbtconv.Vec3ToFloat32Slice(data.Pos)
+
+	nbt["Motion"] = nbtconv.Vec3ToFloat32Slice(data.Vel)
+
+	nbt["Yaw"] = float32(data.Rot[0])
+	nbt["Pitch"] = float32(data.Rot[1])
+	nbt["NameTag"] = data.Name
+	nbt["Fire"] = int16(data.FireDuration.Seconds() * 20)
+	nbt["Age"] = int16(data.Age / (time.Second * 20))
+
+	if original, ok := data.Data.(map[string]any); ok {
+		for k, v := range original {
+			nbt[k] = v
+			println("k = %s, v = %s", k, v)
+		}
+	}
+
+	return nbt
 }
