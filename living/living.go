@@ -212,6 +212,15 @@ func (l *Living) Rotation() cube.Rotation {
 	return l.data.Rot
 }
 
+func (l *Living) SetRotation(yaw, pitch float64) {
+	currentRotation := l.Rotation()
+
+	deltaYaw := yaw - currentRotation.Yaw()
+	deltaPitch := pitch - currentRotation.Pitch()
+
+	l.Move(mgl64.Vec3{}, deltaYaw, deltaPitch)
+}
+
 // Dead returns if the entity is dead or not.
 func (l *Living) Dead() bool {
 	return l.Health() <= mgl64.Epsilon
