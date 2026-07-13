@@ -83,7 +83,7 @@ func (l *Living) Kill(_ world.DamageSource) {
 	// Wait a little before removing the entity. The client displays a death
 	// animation while the player is dying.
 	time.AfterFunc(time.Millisecond*1100, func() {
-		l.H().ExecWorld(finishDying)
+		l.H().Do(finishDying)
 	})
 }
 
